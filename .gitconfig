@@ -1,0 +1,56 @@
+[alias]
+	# List all commits oneline
+	ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
+	#List all commits oneline with dates
+	lds = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
+	
+	#List all commits show changed files
+	ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+	
+	
+	#List all commits with relative dates
+	ld = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative
+	
+	#
+	lg = log --oneline --decorate
+	
+	#List all commits related to a file
+	lf = log -u
+	
+	#Show Last commit
+	lc = "!git ll -1"
+	
+	#Show Last commit diff
+	dlc = diff --cached HEAD^
+	
+	#Show Reviosn diff
+	dr  = "!f() { git diff "$1"^.."$1"; }; f"
+	
+	#Show Changed files in a revision
+	cl  = "!f() { git ll "$1"^.."$1"; }; f"
+	
+	#Find a file
+	f = "!git ls-files | grep -i"
+
+	#Search for String
+	gr = grep -Ii
+	
+	#List aliases
+	la = "!git config -l | grep alias | cut -c 7-"
+	
+	#All all files to staging
+	a = add -A
+	
+	#Status
+	st = status -s
+	
+	#Word diff
+	wdiff = diff --color-words
+	co = checkout
+	cob = checkout -b
+	br = branch
+	ci = commit
+	cim = commit -m
+[user]
+	name = Daniel Richter
+	email = danielr1996@yahoo.de
