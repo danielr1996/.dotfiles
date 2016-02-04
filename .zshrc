@@ -32,7 +32,7 @@ function parse_git_branch {
 }
 
 function parse_git_state {
-	local GIT_STATE=""
+	local GIT_STATE="$GIT_PROMPT_PREFIX"
 	
 	#Ahead
  	local NUM_AHEAD="$(git log --oneline @{u}.. 2> /dev/null | wc -l | tr -d ' ')"
@@ -68,7 +68,7 @@ function parse_git_state {
   	
 	#Else
   	if [[ -n $GIT_STATE ]]; then 
-		echo "$GIT_PROMPT_PREFIX$GIT_STATE" 
+		echo "$GIT_STATE" 
 	fi
 }
 
