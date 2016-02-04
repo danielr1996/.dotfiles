@@ -11,8 +11,8 @@ HISTFILE=~/.zsh_history
 GIT_PROMPT_SYMBOL="$(c magenta)±$(c white)"
 GIT_PROMPT_PREFIX="$(c magenta)[$(c white)"
 GIT_PROMPT_SUFFIX="$(c magenta)]$(c white)"
-GIT_PROMPT_AHEAD="$(c blue)↑NUM$(c white)"
-GIT_PROMPT_BEHIND="$(c blue)↓NUM$(c white)"
+GIT_PROMPT_AHEAD="$(c blue)↗NUM$(c white)"
+GIT_PROMPT_BEHIND="$(c cyan)↘NUM$(c white)"
 GIT_PROMPT_MERGING="$(c red)⚡︎$(c white)"
 GIT_PROMPT_UNTRACKED="$(c red)●$(c white)"
 GIT_PROMPT_MODIFIED="$(c yellow)●$(c white)"
@@ -74,7 +74,7 @@ function parse_git_state {
 
 function git_prompt_string {
 	local git_where="$(parse_git_branch)"
-  	[ -n "$git_where" ] && echo "$GIT_PROMPT_SYMBOL$(parse_git_state) ${git_where#(refs/heads/|tags/)}$GIT_PROMPT_SUFFIX"
+  	[ -n "$git_where" ] && echo "$GIT_PROMPT_SYMBOL$(parse_git_state) $(c yellow)${git_where#(refs/heads/|tags/)}$(c white)$GIT_PROMPT_SUFFIX"
 }
 
 ###########
