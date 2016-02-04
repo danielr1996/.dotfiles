@@ -51,6 +51,7 @@
 	br = branch
 	ci = commit
 	cim = commit -m
+	p = push
 [user]
 	name = Daniel Richter
 	email = danielr1996@yahoo.de
