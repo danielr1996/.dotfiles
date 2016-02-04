@@ -1,0 +1,31 @@
+echo "$(c red)"
+echo "$(c lightred)"
+echo "$(c green)"
+echo "$(c lightgreen)"
+echo "$(c yellow)"
+echo "$(c lightyellow)"
+echo "$(c blue)"
+echo "$(c lightblue)"
+echo "$(c purple)"
+echo "$(c lightpurple)"
+echo "$(c cyan)"
+echo "$(c lightcyan)"
+echo "$(c white)"
+echo "$(c lightwhite)"
+
+ $1 in
+ 27             "red")echo -en "\033[31m";;
+ 28             "lightred")echo -en "\033[1;31m";;
+ 29             "green")echo -en "\033[32m";;
+ 30             "lightgreen")echo -en "\033[1;32m";;
+ 31             "yellow")echo -en "\033[33m";;
+ 32             "lightyellow")echo -en "\033[1;33m";;
+ 33             "blue")echo -en "\033[34m";;
+ 34             "lightblue")echo -en "\033[1;34m";;
+ 35             "purple")echo -en "\033[35m";;
+ 36             "lightpurple")echo -en "\033[1;35m";;
+ 37             "cyan")echo -en "\033[36m";;
+ 38             "lightcyan")echo -en "\033[1;36m";;
+ 39             "white")echo -en "\033[37m";;
+ 40             "lightwhite")echo -en "\033[1;37m";;
+

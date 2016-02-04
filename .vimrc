@@ -1,3 +1,3 @@
-:set nu
-:syntax on
+set nu
+set tabstop=4 softtabstop=0 noexpandtab shiftwidth=4
 

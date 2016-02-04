@@ -1,73 +1,102 @@
-#Screenfetch
-screenfetch -p -E -c41,25 -A 'Arch Linux'   
-setopt histignorealldups sharehistory
-bindkey -v
+#Set zsh vars
+setopt histignorealldups sharehistory prompt_subst
 autoload -U colors; colors
 autoload -U promptinit;promptinit
+##############
+# Global Vars #
+###############
 HISTSIZE=1000
 SAVEHIST=1000
 HISTFILE=~/.zsh_history
+GIT_PROMPT_SYMBOL="$(c magenta)±$(c white)"
+GIT_PROMPT_PREFIX="$(c magenta)[$(c white)"
+GIT_PROMPT_SUFFIX="$(c magenta)]$(c white)"
+GIT_PROMPT_AHEAD="$(c blue)↑NUM$(c white)"
+GIT_PROMPT_BEHIND="$(c blue)↓NUM$(c white)"
+GIT_PROMPT_MERGING="$(c red)⚡︎$(c white)"
+GIT_PROMPT_UNTRACKED="$(c red)●$(c white)"
+GIT_PROMPT_MODIFIED="$(c yellow)●$(c white)"
+GIT_PROMPT_STAGED="$(c green)●$(c white)"
+####################
+# Global Functions #
+####################
+function c {
+	color="y"	
+	if [[ $color == "y" ]]; then
+		echo "%{$fg[$1]%}"
+	fi
+}
 
-#All
+function parse_git_branch {
+	(git symbolic-ref -q HEAD || git name-rev --name-only --no-undefined --always HEAD) 2> /dev/null
+}
+
+function parse_git_state {
+	local GIT_STATE=""
+	
+	#Ahead
+ 	local NUM_AHEAD="$(git log --oneline @{u}.. 2> /dev/null | wc -l | tr -d ' ')"
+ 	if [ "$NUM_AHEAD" -gt 0 ]; then 
+		GIT_STATE=$GIT_STATE${GIT_PROMPT_AHEAD//NUM/$NUM_AHEAD} 
+	fi
+ 	
+	#Behind
+ 	local NUM_BEHIND="$(git log --oneline ..@{u} 2> /dev/null | wc -l | tr -d ' ')"
+ 	if [ "$NUM_BEHIND" -gt 0 ]; then 
+		GIT_STATE=$GIT_STATE${GIT_PROMPT_BEHIND//NUM/$NUM_BEHIND} 
+	fi
+ 	
+	#Merge Conflict
+ 	local GIT_DIR="$(git rev-parse --git-dir 2> /dev/null)"
+ 	if [ -n $GIT_DIR ] && test -r $GIT_DIR/MERGE_HEAD; then 
+		GIT_STATE=$GIT_STATE$GIT_PROMPT_MERGING 
+	fi
+ 	#Untracked
+ 	if [[ -n $(git ls-files --other --exclude-standard 2> /dev/null) ]]; then 
+ 		GIT_STATE=$GIT_STATE$GIT_PROMPT_UNTRACKED 
+	fi
+ 	
+	#Modified
+  	if ! git diff --quiet 2> /dev/null; then 
+		GIT_STATE=$GIT_STATE$GIT_PROMPT_MODIFIED 
+	fi
+  	
+	#Staged
+  	if ! git diff --cached --quiet 2> /dev/null; then 
+		GIT_STATE=$GIT_STATE$GIT_PROMPT_STAGED 
+	fi
+  	
+	#Else
+  	if [[ -n $GIT_STATE ]]; then 
+		echo "$GIT_PROMPT_PREFIX$GIT_STATE" 
+	fi
+}
+
+function git_prompt_string {
+	local git_where="$(parse_git_branch)"
+  	[ -n "$git_where" ] && echo "$GIT_PROMPT_SYMBOL$(parse_git_state) ${git_where#(refs/heads/|tags/)}$GIT_PROMPT_SUFFIX"
+}
+
+###########
+# Aliases #
+###########
 alias lad="ls -lhFA --color | grep -E '^[d]'"
 alias lal="ls -lhFA --color | grep -E '^[l]'"
 alias laf="ls -lhFA --color | grep -E '^[-]'"
-
-#Visible
 alias lvd="ls -lhF --color | grep -E '^[d]'"
 alias lvl="ls -lhF --color | grep -E '^[l]'"
 alias lvf="ls -lhF --color | grep -E '^[-]'"
-
-#Hidden
 alias lhd="ls -lhFAd --color .* | grep -E '^[d]'"
 alias lhl="ls -lhFAd --color .* | grep -E '^[l]'"
 alias lhf="ls -lhFAd --color .* | grep -E '^[-]'"
-
-#Rest
 alias la="lvd; lhd; lvf; lhf;lvl;lhl"
 alias lv="lvd; lvf;lvl"
 alias lh="lhd; lhf; lhl"
 alias rm="rm -r"
 alias cp="cp -r"
 
-function c {
-	if [[ $1 == 'r' ]];then
-		echo -n $reset_color
-	fi
-	echo -n "%{$fg[$1]%}"
-}
-
-function git_prompt {
-	git rev-parse --abbrev-ref HEAD &> /dev/null
-	if [ $? -eq 0 ];then
-		if [ -d "$(pwd)/.git" ] && [ $? -eq 0 ];then
-			git_color;git_branch
-		fi
-	fi
-	echo ""	
-}
-
-#git_color function to set the color depending on git status //TODO make this independent from locals
-function git_color {
-	git_status="$(git status 2> /dev/null)"
-	if [[ $git_status == *"Changes to be committed"* ]];then
-		echo -ne $c_yellow
-	elif [[ $git_status == *"nothing to commit"* ]] || [[ $git_status == *"nichts zu comitten"* ]];then
-		echo -ne "$(c green)"
-	elif [[ $git_status == *"untracked files"* ]];then
-		echo -ne $c_red
-	else
-		echo -ne $c_gray
-	fi
-}
-
-#git_branch function to return the current branch //TODO display ref id when in detached head state
-function git_branch {
-	echo -e "±[$(git rev-parse --abbrev-ref HEAD)]"
-}
-precmd () {
-	#RPS1="$(git_prompt)"
-	PROMPT="$(c cyan)%n$(c r)@$(c blue)%m$(c r): $(c green)%~ $(c red)
-%(!.#.$) "
-	RPROMPT="%(?,$(c green)✔,$(c red)%? ✘) $(c white) $(git_prompt) $(c white)"
-}
+#Screenfetch
+#screenfetch -p -E -c41,25 -A 'Arch Linux'   
+PROMPT="$(c red)%n$reset_color@$(c green)%m$reset_color: $(c yellow)%~
+$(c cyan)%(!.#.$) " 
+RPS1='%(?,$(c green)✔,$(c red)%? ✘) $(git_prompt_string)'
