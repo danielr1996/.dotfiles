@@ -1,5 +1,5 @@
 #Set zsh vars
-setopt histignorealldups sharehistory prompt_subst
+setopt histignorealldups prompt_subst
 autoload -U colors; colors
 autoload -U promptinit;promptinit
 ##############
@@ -32,43 +32,43 @@ function parse_git_branch {
 }
 
 function parse_git_state {
-	local GIT_STATE="$GIT_PROMPT_PREFIX"
+	local GIT_STATE="$GIT_PROMPT_PREFIX "
 	
 	#Ahead
  	local NUM_AHEAD="$(git log --oneline @{u}.. 2> /dev/null | wc -l | tr -d ' ')"
  	if [ "$NUM_AHEAD" -gt 0 ]; then 
-		GIT_STATE=$GIT_STATE${GIT_PROMPT_AHEAD//NUM/$NUM_AHEAD} 
+		GIT_STATE="$GIT_STATE${GIT_PROMPT_AHEAD//NUM/$NUM_AHEAD}"
 	fi
  	
 	#Behind
  	local NUM_BEHIND="$(git log --oneline ..@{u} 2> /dev/null | wc -l | tr -d ' ')"
  	if [ "$NUM_BEHIND" -gt 0 ]; then 
-		GIT_STATE=$GIT_STATE${GIT_PROMPT_BEHIND//NUM/$NUM_BEHIND} 
+		GIT_STATE="$GIT_STATE${GIT_PROMPT_BEHIND//NUM/$NUM_BEHIND}"
 	fi
  	
 	#Merge Conflict
  	local GIT_DIR="$(git rev-parse --git-dir 2> /dev/null)"
  	if [ -n $GIT_DIR ] && test -r $GIT_DIR/MERGE_HEAD; then 
-		GIT_STATE=$GIT_STATE$GIT_PROMPT_MERGING 
+		GIT_STATE="$GIT_STATE$GIT_PROMPT_MERGING"
 	fi
  	#Untracked
  	if [[ -n $(git ls-files --other --exclude-standard 2> /dev/null) ]]; then 
- 		GIT_STATE=$GIT_STATE$GIT_PROMPT_UNTRACKED 
+ 		GIT_STATE="$GIT_STATE$GIT_PROMPT_UNTRACKED"
 	fi
  	
 	#Modified
   	if ! git diff --quiet 2> /dev/null; then 
-		GIT_STATE=$GIT_STATE$GIT_PROMPT_MODIFIED 
+		GIT_STATE="$GIT_STATE$GIT_PROMPT_MODIFIED"
 	fi
   	
 	#Staged
   	if ! git diff --cached --quiet 2> /dev/null; then 
-		GIT_STATE=$GIT_STATE$GIT_PROMPT_STAGED 
+		GIT_STATE="$GIT_STATE$GIT_PROMPT_STAGED" 
 	fi
   	
 	#Else
   	if [[ -n $GIT_STATE ]]; then 
-		echo "$GIT_STATE" 
+		echo "$GIT_STATE " 
 	fi
 }
 
