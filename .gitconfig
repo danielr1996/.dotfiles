@@ -21,7 +21,7 @@
 	lc = "!git ll -1"
 	
 	#Show Last commit diff
-	dlc = diff --cached HEAD^
+	dlc = diff --word-diff=color --cached HEAD^
 	
 	#Show Reviosn diff
 	dr  = "!f() { git diff "$1"^.."$1"; }; f"

@@ -1,7 +1,9 @@
+main(){
 #Set zsh vars
 setopt histignorealldups prompt_subst
 autoload -U colors; colors
 autoload -U promptinit;promptinit
+
 ##############
 # Global Vars #
 ###############
@@ -17,6 +19,32 @@ GIT_PROMPT_MERGING="$(c red)⚡︎$(c white)"
 GIT_PROMPT_UNTRACKED="$(c red)●$(c white)"
 GIT_PROMPT_MODIFIED="$(c yellow)●$(c white)"
 GIT_PROMPT_STAGED="$(c green)●$(c white)"
+
+###########
+# Aliases #
+###########
+alias lad="ls -lhFA --color | grep -E '^[d]'"
+alias lal="ls -lhFA --color | grep -E '^[l]'"
+alias laf="ls -lhFA --color | grep -E '^[-]'"
+alias lvd="ls -lhF --color | grep -E '^[d]'"
+alias lvl="ls -lhF --color | grep -E '^[l]'"
+alias lvf="ls -lhF --color | grep -E '^[-]'"
+alias lhd="ls -lhFAd --color .* | grep -E '^[d]'"
+alias lhl="ls -lhFAd --color .* | grep -E '^[l]'"
+alias lhf="ls -lhFAd --color .* | grep -E '^[-]'"
+alias la="lvd; lhd; lvf; lhf;lvl;lhl"
+alias lv="lvd; lvf;lvl"
+alias lh="lhd; lhf; lhl"
+alias rm="rm -r"
+alias cp="cp -r"
+
+#Screenfetch
+#screenfetch -p -E -c41,25 -A 'Arch Linux'   
+PROMPT="$(c red)%n$reset_color@$(c green)%m$reset_color: $(c yellow)%~
+$(c cyan)%(!.#.$)$(c white) " 
+RPS1='%(?,$(c green)✔,$(c red)%? ✘) $(git_prompt_string)$(c white)'
+}
+
 ####################
 # Global Functions #
 ####################
@@ -76,27 +104,4 @@ function git_prompt_string {
 	local git_where="$(parse_git_branch)"
   	[ -n "$git_where" ] && echo "$GIT_PROMPT_SYMBOL$(parse_git_state) $(c yellow)${git_where#(refs/heads/|tags/)}$(c white)$GIT_PROMPT_SUFFIX"
 }
-
-###########
-# Aliases #
-###########
-alias lad="ls -lhFA --color | grep -E '^[d]'"
-alias lal="ls -lhFA --color | grep -E '^[l]'"
-alias laf="ls -lhFA --color | grep -E '^[-]'"
-alias lvd="ls -lhF --color | grep -E '^[d]'"
-alias lvl="ls -lhF --color | grep -E '^[l]'"
-alias lvf="ls -lhF --color | grep -E '^[-]'"
-alias lhd="ls -lhFAd --color .* | grep -E '^[d]'"
-alias lhl="ls -lhFAd --color .* | grep -E '^[l]'"
-alias lhf="ls -lhFAd --color .* | grep -E '^[-]'"
-alias la="lvd; lhd; lvf; lhf;lvl;lhl"
-alias lv="lvd; lvf;lvl"
-alias lh="lhd; lhf; lhl"
-alias rm="rm -r"
-alias cp="cp -r"
-
-#Screenfetch
-#screenfetch -p -E -c41,25 -A 'Arch Linux'   
-PROMPT="$(c red)%n$reset_color@$(c green)%m$reset_color: $(c yellow)%~
-$(c cyan)%(!.#.$) " 
-RPS1='%(?,$(c green)✔,$(c red)%? ✘) $(git_prompt_string)'
+main
