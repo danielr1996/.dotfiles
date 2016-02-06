@@ -69,6 +69,7 @@ function parse_git_state {
 	fi
  	
 	#Behind
+	git fetch
  	local NUM_BEHIND="$(git log --oneline ..@{u} 2> /dev/null | wc -l | tr -d ' ')"
  	if [ "$NUM_BEHIND" -gt 0 ]; then 
 		GIT_STATE="$GIT_STATE${GIT_PROMPT_BEHIND//NUM/$NUM_BEHIND}"
