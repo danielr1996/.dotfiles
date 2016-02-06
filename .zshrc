@@ -60,7 +60,7 @@ function parse_git_branch {
 }
 
 function parse_git_state {
-	local GIT_STATE="$GIT_PROMPT_PREFIX "
+	local GIT_STATE="" # "$GIT_PROMPT_PREFIX "
 	
 	#Ahead
  	local NUM_AHEAD="$(git log --oneline @{u}.. 2> /dev/null | wc -l | tr -d ' ')"
@@ -96,12 +96,12 @@ function parse_git_state {
   	
 	#Else
   	if [[ -n $GIT_STATE ]]; then 
-		echo "$GIT_STATE " 
+		echo " $GIT_STATE " 
 	fi
 }
 
 function git_prompt_string {
 	local git_where="$(parse_git_branch)"
-  	[ -n "$git_where" ] && echo "$GIT_PROMPT_SYMBOL$(parse_git_state) $(c yellow)${git_where#(refs/heads/|tags/)}$(c white)$GIT_PROMPT_SUFFIX"
+  	[ -n "$git_where" ] && echo "$GIT_PROMPT_SYMBOL$GIT_PROMPT_PREFIX$(parse_git_state)$(c yellow)${git_where#(refs/heads/|tags/)}$(c white)$GIT_PROMPT_SUFFIX"
 }
 main
