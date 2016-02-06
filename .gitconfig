@@ -39,3 +39,5 @@
 [user]
 	name = Daniel Richter
 	email = danielr1996@yahoo.de
+[push]
+	default = matching
