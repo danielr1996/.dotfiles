@@ -11,7 +11,7 @@ GIT_PROMPT_MERGING="$(c red)⚡︎$(c white)"
 GIT_PROMPT_UNTRACKED="$(c red)●$(c white)"
 GIT_PROMPT_MODIFIED="$(c yellow)●$(c white)"
 GIT_PROMPT_STAGED="$(c green)●$(c white)"
-
+PROMPT_COMMAND="$(set_prompt)"
 ###########
 # Aliases #
 ###########
@@ -32,10 +32,12 @@ alias cp="cp -r"
 
 #Screenfetch
 #screenfetch -p -E -c41,25 -A 'Arch Linux'   
-PS1="$(c red)\u$reset_color@$(c green)\h$reset_color: $(c yellow)\W $(c cyan) "
-PS1+="$(git_prompt_string)$(c white) \$$(c white)\n"
+function set_prompt {
+	PS1="$(c red)\u$reset_color@$(c green)\h$reset_color: $(c yellow)\W $(c cyan) "
+	PS1+="$(git_prompt_string)$(c white) \$$(c white)\n"
 }
 
+}
 ####################
 # Global Functions #
 ####################
@@ -66,7 +68,7 @@ function parse_git_branch {
 }
 
 function parse_git_state {
-	local GIT_STATE="$GIT_PROMPT_PREFIX"
+	local GIT_STATE="$GIT_PROMPT_PREFIX "
 	
 	#Ahead
  	local NUM_AHEAD="$(git log --oneline @{u}.. 2> /dev/null | wc -l | tr -d ' ')"
