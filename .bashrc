@@ -11,7 +11,7 @@ GIT_PROMPT_MERGING="$(c red)⚡︎$(c white)"
 GIT_PROMPT_UNTRACKED="$(c red)●$(c white)"
 GIT_PROMPT_MODIFIED="$(c yellow)●$(c white)"
 GIT_PROMPT_STAGED="$(c green)●$(c white)"
-PROMPT_COMMAND="$(set_prompt)"
+PROMPT_COMMAND=set_prompt
 ###########
 # Aliases #
 ###########
@@ -29,15 +29,14 @@ alias lv="lvd; lvf;lvl"
 alias lh="lhd; lhf; lhl"
 alias rm="rm -r"
 alias cp="cp -r"
-
+}
 #Screenfetch
 #screenfetch -p -E -c41,25 -A 'Arch Linux'   
 function set_prompt {
-	PS1="$(c red)\u$reset_color@$(c green)\h$reset_color: $(c yellow)\W $(c cyan) "
-	PS1+="$(git_prompt_string)$(c white) \$$(c white)\n"
+PS1="$(c red)\u$reset_color@$(c green)\h$reset_color: $(c yellow)\W $(c cyan) "
+PS1+="$(git_prompt_string)$(c white) \$$(c white)\n"
 }
 
-}
 ####################
 # Global Functions #
 ####################
