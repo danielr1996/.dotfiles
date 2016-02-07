@@ -1,6 +1,9 @@
 [alias]
-	# Changes since last commit
+	#Log oneline
+	lg = log --oneline --graph
 
+	# Changes since last commit
+	
 	# List all commits oneline
 	#ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
 	#List all commits oneline with dates
