@@ -37,7 +37,7 @@ alias lv="lvd; lvf;lvl"
 alias lh="lhd; lhf; lhl"
 alias rm="rm -r"
 alias cp="cp -r"
-
+alias sudo="sudo "
 #Screenfetch
 #screenfetch -p -E -c41,25 -A 'Arch Linux'   
 PROMPT="$(c red)%n$reset_color@$(c green)%m$reset_color: $(c yellow)%~
