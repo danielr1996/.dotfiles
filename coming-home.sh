@@ -12,12 +12,25 @@ files_dir="$(dirname $(readlink -f $0))/"
 #files or dirs to ignore
 ignore=".|..|.git|.gitignore|$(basename $0)|"
 
+#Iterate every file
 for f in $files_dir{.,}*; do
-	f=$(basename $f)	
+	# current file
+	f=$(basename $f)
+
+	# File is not in ignore	
 	if [[ ! "$ignore" == *"$f|"* ]]; then
+		#If file exists
 		if [[ -e $install_dir$f ]]; then
+			#check if file shoud be overriden
 			if [[ $@ == "-f" ]]; then
 				ln -sf $files_dir$f $install_dir$f
+			#elif [[ $@ == "-i" ]]; then
+				#echo "Override file $f? (y/n)"
+				#read ANSWER
+				#if [[ $ANSWER == "y" ]]; then
+				#	
+				#	ln -sf $files_dir$f $installdir$f
+				#fi
 			fi	
 		else
 			ln -s $files_dir$f $install_dir$f
