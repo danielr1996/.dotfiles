@@ -106,4 +106,10 @@ function git_prompt_string {
 	local git_where="$(parse_git_branch)"
   	[ -n "$git_where" ] && echo "$GIT_PROMPT_SYMBOL$GIT_PROMPT_PREFIX$(parse_git_state)$(c yellow)${git_where#(refs/heads/|tags/)}$(c white)$GIT_PROMPT_SUFFIX"
 }
+
+sssh(){
+  # try to connect every 0.5 secs (modulo timeouts)
+  while true; do command ssh "$@"; [ $? -eq 0 ] && break || sleep 0.5; done
+}
+
 main
