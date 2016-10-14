@@ -1,44 +1,27 @@
 [alias]
-	#Log oneline
-	lg = log --oneline --graph
+	 #Update mvn version
+	 mvnv= !"mvn versions:set -DgenerateBackupPoms=false -DnewVersion=$(git describe |\
+	 		cut -d"-" -f1,2)"
 
-	# Changes since last commit
-	
-	# List all commits oneline
-	#ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
-	#List all commits oneline with dates
-	#lds = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
-	#List all commits show changed files
-	#ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
-	#List all commits with relative dates
-	#ld = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative
-	#lg = log --oneline --decorate
-	#List all commits related to a file
-	#lf = log -u
-	#Show Last commit
-	#lc = "!git ll -1"
-	#Show Last commit diff
-	#dlc = diff --word-diff=color --cached HEAD^
-	#Show Reviosn diff
-	#dr  = "!f() { git diff "$1"^.."$1"; }; f"
-	#Show Changed files in a revision
-	#cl  = "!f() { git ll "$1"^.."$1"; }; f"
-	#Find a file
-	#f = "!git ls-files | grep -i"
-	#Search for String
-	#gr = grep -Ii
+	#Log Commits
+	ls = log --pretty=format:"%C(yellow)%h\\ %C(green)%ad\\ %C(reset)%s%C(auto)%d" --graph --date=relative
+	ld = log --pretty=format:"%C(yellow)%h\\ %C(green)%ad\\ %C(reset)%s%C(auto)%d" --graph --date=short
+
 	#List aliases
 	la = "!git config -l | grep alias | cut -c 7-"
-	a = add -A
+	a = add .
 	st = status
-	sts = status -s
-	wdiff = diff --color-words
+	s = status -s
+	diff = diff --color-words
 	co = checkout
 	cob = checkout -b
 	br = branch
 	ci = commit
 	cim = commit -m
-	p = push
+	pu = push
+	rb = rebase
+	cp=cherry-pick
+	cl=clone
 [user]
 	name = Daniel Richter
 	email = danielr1996@yahoo.de
