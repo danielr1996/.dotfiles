@@ -2,7 +2,7 @@ function git_prompt(){
 	###
 	# Set Symbols to do display
 	##ä
-	local PREFIX="$(color white)[";
+	local PREFIX="$(color white)±[";
 	local AHEAD="$(color green)↑";
 	local BEHIND="$(color red)↓";
 	local MERGE="$(color purple)#";
