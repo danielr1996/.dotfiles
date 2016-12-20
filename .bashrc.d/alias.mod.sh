@@ -2,10 +2,6 @@ alias rm="rm -r"
 alias cp="cp -r"
 alias ls="ls --color"
 
-function ssh(){
-	while true; do command ssh "$@"; [ $? -eq 0 ] break || sleep 1; done
-}
-
 ###
 # List all directories 
 # 
