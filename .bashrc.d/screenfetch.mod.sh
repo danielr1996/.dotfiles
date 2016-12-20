@@ -1,3 +1,3 @@
-if type screenfetch >/dev/null; then
+if [[ -n $(which screenfetch) ]]; then 
 	screenfetch | egrep -v '\[\['
 fi
