@@ -2,14 +2,14 @@ function git_prompt(){
 	###
 	# Set Symbols to do display
 	##ä
-	local PREFIX="$(color white)±[";
+	local PREFIX="$(color white)±⟨";
 	local AHEAD="$(color green)↑";
 	local BEHIND="$(color red)↓";
 	local MERGE="$(color purple)#";
 	local STAGED="$(color green)+";
 	local MODIFIED="$(color yellow)+";
 	local UNTRACKED="$(color red)+";
-	local SUFFIX="$(color white)]";
+	local SUFFIX="$(color white)⟩";
 	
 	###
 	# Determinte AHEAD/BEHIND commits and branch name
