@@ -5,7 +5,7 @@ function git_prompt(){
 	local PREFIX="$(color white)±[";
 	local AHEAD="$(color green)↑";
 	local BEHIND="$(color red)↓";
-	local MERGE="$(color purple)#֍";
+	local MERGE="$(color purple)♯";
 	local STAGED="$(color green)●";
 	local MODIFIED="$(color yellow)●";
 	local UNTRACKED="$(color red)●";
