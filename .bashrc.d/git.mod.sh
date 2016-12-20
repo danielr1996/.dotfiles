@@ -2,14 +2,14 @@ function git_prompt(){
 	###
 	# Set Symbols to do display
 	##ä
-	local PREFIX="$(color white){";
+	local PREFIX="$(color white)[";
 	local AHEAD="$(color green)↑";
 	local BEHIND="$(color red)↓";
 	local MERGE="$(color purple)#";
 	local STAGED="$(color green)+";
 	local MODIFIED="$(color yellow)+";
 	local UNTRACKED="$(color red)+";
-	local SUFFIX="$(color white)}";
+	local SUFFIX="$(color white)]";
 	
 	###
 	# Determinte AHEAD/BEHIND commits and branch name
@@ -31,32 +31,32 @@ function git_prompt(){
 		
 		# If you are commits behind, display how many	
 		if [ "$NAHEAD" -gt 0 ]; then
-			echo -n $AHEAD$NAHEAD
+			echo -n $AHEAD$NAHEAD" "
 		fi
 		
 		# If you are commits ahead, display how many
 		if [ "$NBEHIND" -gt 0 ]; then
-			echo -n $BEHIND$NBEHIND
+			echo -n $BEHIND$NBEHIND" "
 		fi
 		
 		# If .git/MERGE_HEAD we're in merge mode
 		if test -r $(git rev-parse --git-dir 2>/dev/null)/MERGE_HEAD;then
-			echo -n $MERGE 
+			echo -n $MERGE" " 
 		fi
 		
 		# If There are Staged files display it
 		if ! git diff --cached --quiet 2> /dev/null; then
-			echo -n $STAGED
+			echo -n $STAGED" "
 		fi
 
 		# If there are Modified files display it
 		if ! git diff --quiet 2> /dev/null; then
-			echo -n $MODIFIED 
+			echo -n $MODIFIED" "
 		fi
 
 		# If there are Untracked files display it
 		if [[ -n $(git ls-files --other --exclude-standard 2> /dev/null) ]]; then
-			echo -n $UNTRACKED
+			echo -n $UNTRACKED" "
 		fi
 		
 		# Display branch name
