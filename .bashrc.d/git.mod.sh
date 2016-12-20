@@ -7,8 +7,8 @@ function git_prompt(){
 	local BEHIND="$(color red)↓";
 	local MERGE="$(color purple)#";
 	local STAGED="$(color green)•●⏺🌑";
-	local MODIFIED="$(color yellow)•";
-	local UNTRACKED="$(color red)•";
+	local MODIFIED="$(color yellow)•●⏺🌑";
+	local UNTRACKED="$(color red)•●⏺🌑";
 	local SUFFIX="$(color white)]";
 	
 	###
