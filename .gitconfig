@@ -9,6 +9,7 @@
 
 	#List aliases
 	la = "!git config -l | grep alias | cut -c 7-"
+	
 	a = add -A 
 	st = status
 	s = status -s
@@ -18,10 +19,14 @@
 	br = branch
 	ci = commit
 	cim = commit -m
-	pu = push
 	rb = rebase
 	cp=cherry-pick
 	cl=clone
+	
+	p = push	
+	f = fetch
+	m = merge
+	fm = pull
 [user]
 	name = Daniel Richter
 	email = danielr1996@yahoo.de
