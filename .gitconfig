@@ -18,7 +18,8 @@
 	cob = checkout -b
 	br = branch
 	ci = commit
-	cim = commit -m
+	c = commit -m
+	ca = commit -am
 	rb = rebase
 	cp=cherry-pick
 	cl=clone
