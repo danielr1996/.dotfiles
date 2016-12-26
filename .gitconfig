@@ -28,6 +28,7 @@
 	p = push	
 	f = fetch
 	m = merge
+	ms = merge --squash
 	fm = pull
 	ff = pull
 [user]
