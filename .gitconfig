@@ -13,7 +13,8 @@
 	a = add -A 
 	st = status
 	s = status -s
-	diff = diff --color-words
+	dif = diff --color-words
+
 	co = checkout
 	cob = checkout -b
 	br = branch
