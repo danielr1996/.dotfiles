@@ -1,6 +1,6 @@
 #!/bin/bash
 #Shell script to install .dotfiles (i.e. link files)
-#usage: coming-home.sh [-f]
+#usage: coming-home.sh -f 
 	# -f: use the -f flag to override existing files (overrides every existing file)
 
 #dir to install the .dotfiles, usually this is the home dir(~)
@@ -24,13 +24,6 @@ for f in $files_dir{.,}*; do
 			#check if file shoud be overriden
 			if [[ $@ == "-f" ]]; then
 				ln -sf $files_dir$f $install_dir$f
-			#elif [[ $@ == "-i" ]]; then
-				#echo "Override file $f? (y/n)"
-				#read ANSWER
-				#if [[ $ANSWER == "y" ]]; then
-				#	
-				#	ln -sf $files_dir$f $installdir$f
-				#fi
 			fi	
 		else
 			ln -s $files_dir$f $install_dir$f
