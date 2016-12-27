@@ -18,12 +18,17 @@
 	co = checkout
 	cob = checkout -b
 	br = branch
-	ci = commit
-	c = commit -m
-	ca = commit -am
+	
+	#Commit
+	c = commit
+	ca = commit -a
+	cm = commit -m
+	cam = commit -am
+	
 	rb = rebase
 	cp=cherry-pick
 	cl=clone
+	unstash=stash pop
 
 	#Remote Repositories	
 	p = push	
@@ -38,4 +43,4 @@
 [push]
 	default = matching
 [commit]
-	template = .gitmessage
+	template = ~/.gitmessage
