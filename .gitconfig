@@ -13,13 +13,18 @@
 	a = add -A 
 	st = status
 	s = status -s
-	diff = diff --color-words
+	dif = diff --color-words
+
 	co = checkout
 	cob = checkout -b
 	br = branch
-	ci = commit
-	c = commit -m
-	ca = commit -am
+	
+	#Commit
+	c = commit
+	ca = commit -a
+	cm = commit -m
+	cam = commit -am
+	
 	rb = rebase
 	cp=cherry-pick
 	cl=clone
@@ -36,3 +41,5 @@
 	email = danielr1996@yahoo.de
 [push]
 	default = matching
+[commit]
+	template = ~/.gitmessage
