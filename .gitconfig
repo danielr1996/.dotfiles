@@ -23,7 +23,7 @@
 	rb = rebase
 	cp=cherry-pick
 	cl=clone
-
+	unstash=stash pop
 	#Remote Repositories	
 	p = push	
 	f = fetch
