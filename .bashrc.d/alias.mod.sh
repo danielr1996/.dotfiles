@@ -1,7 +1,7 @@
 alias rm="rm -r"
 alias cp="cp -r"
 alias ls="ls --color"
-
+alias g="git"
 ###
 # List all directories 
 # 
