@@ -4,8 +4,10 @@
 	 		cut -d"-" -f1,2)"
 
 	#Log Commits
-	l = log --pretty=format:"%C(yellow)%h\\ %C(green)%ad\\ %C(reset)%s%C(auto)%d" --graph --date=relative
-	ld = log --pretty=format:"%C(yellow)%h\\ %C(green)%ad\\ %C(reset)%s%C(auto)%d" --graph --date=short
+	l = log --pretty=format:"%C(yellow)%h\\ %C(reset)-\\ %C(green)(%ad)\\ %C(reset)-\\ %C(reset)%s%C(auto)%d"  --date=relative
+	lg = log --pretty=format:"%C(yellow)%h\\ %C(reset)-\\ %C(green)(%ad)\\ %C(reset)-\\ %C(reset)%s%C(auto)%d" --graph --date=relative
+	ld = log --pretty=format:"%C(yellow)%h\\ %C(reset)-\\ %C(green)(%ad)\\ %C(reset)-\\ %C(reset)%s%C(auto)%d" --graph --date=short
+	
 	bd = !"git l HEAD..origin/HEAD"	
 
 	#List aliases
@@ -25,7 +27,7 @@
 	ca = commit -a
 	cm = commit -m
 	cam = commit -am
-	
+	cad = commit --amend --no-edit
 	rb = rebase
 	cp=cherry-pick
 	cl=clone
@@ -38,10 +40,34 @@
 	ms = merge --squash
 	fm = pull
 	ff = pull
-[user]
-	name = Daniel Richter
-	email = danielr1996@yahoo.de
+
+	discard = checkout -- .
+	unstage =reset HEAD
+	dc = checkout -- .
+	use =reset HEAD
+
 [push]
-	default = matching
-[commit]
-	template = ~/.gitmessage
+	default = current 
+	
+[color]
+	ui = auto
+	
+[i18n]
+	commitencoding = utf-8
+	logoutputencoding = utf-8
+
+[core]
+	filemode = false
+	preloadindex = true
+	fscache = true	
+	
+[branch]
+	autosetupmerge = always
+	autosetuprebase = always
+	
+[include]
+	path = .git.additional.config
+[rerere]
+	enabled = true
+[include]
+	path = .git.user.config

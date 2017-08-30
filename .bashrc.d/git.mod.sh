@@ -16,7 +16,7 @@ function git_prompt(){
 	##
 	local NAHEAD="$(git log --oneline @{u}.. 2> /dev/null | wc -l | tr -d ' ')"
 	local NBEHIND="$(git log --oneline ..@{u} 2> /dev/null | wc -l |tr -d ' ')"
-	local BRANCH="$((git symbolic-ref -q --short HEAD || git describe --tags --exact-match)2>/dev/null)"
+	local BRANCH="$((git symbolic-ref -q --short HEAD || git describe --tags --exact-match || git rev-parse --short HEAD)2>/dev/null)"
 	
 	# If BRANCH is empty (i.e. we are not in a git repo)
 	if [[ -n $BRANCH ]];then
