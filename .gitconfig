@@ -7,7 +7,8 @@
 	l = log --pretty=format:"%C(yellow)%h\\ %C(reset)-\\ %C(green)(%ad)\\ %C(reset)-\\ %C(reset)%s%C(auto)%d"  --date=relative
 	lg = log --pretty=format:"%C(yellow)%h\\ %C(reset)-\\ %C(green)(%ad)\\ %C(reset)-\\ %C(reset)%s%C(auto)%d" --graph --date=relative
 	ld = log --pretty=format:"%C(yellow)%h\\ %C(reset)-\\ %C(green)(%ad)\\ %C(reset)-\\ %C(reset)%s%C(auto)%d" --graph --date=short
-	
+
+
 	bd = !"git l HEAD..origin/HEAD"	
 
 	#List aliases

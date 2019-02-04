@@ -14,8 +14,8 @@ function git_prompt(){
 	###
 	# Determinte AHEAD/BEHIND commits and branch name
 	##
-	local NAHEAD="$(git log --oneline @{u}.. 2> /dev/null | wc -l | tr -d ' ')"
-	local NBEHIND="$(git log --oneline ..@{u} 2> /dev/null | wc -l |tr -d ' ')"
+	local NAHEAD="$(git log --oneline @{push}.. 2> /dev/null | wc -l | tr -d ' ')"
+	local NBEHIND="$(git log --oneline ..@{push} 2> /dev/null | wc -l |tr -d ' ')"
 	local BRANCH="$((git symbolic-ref -q --short HEAD || git describe --tags --exact-match || git rev-parse --short HEAD)2>/dev/null)"
 	
 	# If BRANCH is empty (i.e. we are not in a git repo)
