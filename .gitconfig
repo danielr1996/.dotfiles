@@ -4,8 +4,6 @@
 	 		cut -d"-" -f1,2)"
 
 	#Log Commits
-	l = log --pretty=format:"%C(yellow)%h\\ %C(reset)-\\ %C(green)(%ad)\\ %C(reset)-\\ %C(reset)%s%C(auto)%d"  --date=relative
-	lg = log --pretty=format:"%C(yellow)%h\\ %C(reset)-\\ %C(green)(%ad)\\ %C(reset)-\\ %C(reset)%s%C(auto)%d" --graph --date=relative
 	ld = log --pretty=format:"%C(yellow)%h\\ %C(reset)-\\ %C(green)(%ad)\\ %C(reset)-\\ %C(reset)%s%C(auto)%d" --graph --date=short
 
 
